@@ -62,6 +62,33 @@ TEST(SelectTest, WrongColumn){
     EXPECT_EQ(out.str(), expected);
 }
 
+TEST (SelectTest, ORandAND) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"First", "Last", "Position"});
+    sheet.add_row({"Lebron", "James", "Power Forward"});
+    sheet.add_row({"Steph", "Curry", "Point Guard"});
+    sheet.add_row({"Dame", "Lillard", "Point Guard"});
+    sheet.add_row({"Joel", "Embiid", "Center"});
+    sheet.add_row({"Anthony", "Davis", "Center"});
+    sheet.add_row({"Kobe", "Bryant", "Shooting Guard"});
 
+    stringstream out;
+    sheet.set_selection(new Select_Or(
+      new Select_And(
+	new Select_Contains(&sheet, "Position", "Center"),
+	new Select_Contains(&sheet, "Position", "Davis")),
+      new Select_Contains(&sheet, "Position", "Guard"));
+    sheet.print_selection(out);
+
+    string expected = "Steph Curry \nDame Lillard \nAnthony Davis \nKobe Bryant \n";
+
+    EXPECT_EQ(out.str(), expected);
+}
 #endif
+
+
+
+
+
+
 
