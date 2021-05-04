@@ -46,12 +46,12 @@ Spreadsheet sheet;
     sheet.add_row({"Dominick","DOLE","22","communications"});
     sheet.add_row({"George","Genius","9","astrophysics"});
 
-        string one = "Brian Becker 21 computer science \n";
-        string two = "Joe Jackson 21 mathematics \n";
+        string one = "Diane DOLE 20 computer engineering \n";
+        string two = "Dominick DOLE 22 communications \n";
         string printed = one +two;
 
         stringstream ss;
-        sheet.set_selection(new Select_Contains(&sheet, "Last", "c"));
+        sheet.set_selection(new Select_Contains(&sheet, "Last", "DOLE"));
         sheet.print_selection(ss);
 
         EXPECT_EQ(ss.str(), printed);
