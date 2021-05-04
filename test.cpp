@@ -3,12 +3,12 @@
 
 #include "gtest/gtest.h"
 
-#include "select_test.hpp"
+//#include "select_test.hpp"
 
 #include <string>
 #include <iostream>
 
-//using namespace std;
+using namespace std;
 
 
 int main(int argc, char **argv) {
