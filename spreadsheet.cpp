@@ -45,11 +45,11 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
 
 void Spreadsheet::print_selection(ostream &out) const {
     bool sel;
-	
-    if(select == nullptr) {
+
+    if (select == nullptr) {
 	for (auto col : data) {
-	    for (auto row : it)
-		out << row << " ";
+	    for (auto row : col)
+		out << row << ' ';
 	    out << endl;
 	}
     }
@@ -59,13 +59,10 @@ void Spreadsheet::print_selection(ostream &out) const {
 	    sel = select->select(this,i);
 	    if (sel) {
 		for (auto curr : data.at(i)) 
-		    out << curr << " ";
-	        out << endl;
+		    out << curr << ' ';
+		out << endl;
+
 	    }
 	}
     }
 }
-
-
-
-
