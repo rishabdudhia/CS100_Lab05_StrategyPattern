@@ -40,3 +40,29 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
             return i;
     return -1;
 }
+
+void Spreadsheet::print_selection(ostream &out) const {
+    bool sel;
+    if(select == nullptr) {
+	for (auto col : data) {
+	    for (auto row : it)
+		out << row << " ";
+	    out << endl;
+	}
+    }
+
+    else {
+	for (int i = 0; i < data.size(); i++) {
+	    sel = select->select(this,i);
+	    if (sel) {
+		for (auto curr : data.at(i)) 
+		    out << curr << " ";
+	        out << endl;
+	    }
+	}
+    }
+}
+
+
+
+
