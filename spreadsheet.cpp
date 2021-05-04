@@ -1,10 +1,11 @@
 #include "spreadsheet.hpp"
 #include "select.hpp"
 
+#include<sstream> 
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
+using namespace std; 
 
 Spreadsheet::~Spreadsheet()
 {
@@ -47,9 +48,10 @@ void Spreadsheet::print_selection(ostream &out) const {
     bool sel;
 	
     if(select == nullptr) {
-	for (auto col : data) {
-	    for (auto row : it)
-		out << row << " ";
+	for (unsigned int i = 0; i<this->data.size(); i++){
+	    for (unsigned int j = 0; j<this->data.at(i).size(); j++){
+		out << data.at(i).at(j)<< " ";
+}
 	    out << endl;
 	}
     }
@@ -59,13 +61,10 @@ void Spreadsheet::print_selection(ostream &out) const {
 	    sel = select->select(this,i);
 	    if (sel) {
 		for (auto curr : data.at(i)) 
-		    out << curr << " ";
-	        out << endl;
+		    out << curr << ' ';
+		out << endl;
+
 	    }
 	}
     }
 }
-
-
-
-
