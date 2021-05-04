@@ -2,6 +2,8 @@
 #include "spreadsheet.cpp"
 #include "select.hpp"
 #include "gtest/gtest.h"
+#include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -12,9 +14,9 @@ TEST(SampleTests, testing_Not) {
     sheet.add_row({"four", "five", "six"});
     sheet.add_row({"seven", "eight", "nine"});
 
-    string expected = "four five six \n";
+    string expected = "one two three \nseven eight nine \n";
     stringstream out;
-    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "First", "e")));
+    sheet.set_selection(new Select_Contains(&sheet, "First", "e"));
     EXPECT_EQ(out.str(), expected);
 }
 

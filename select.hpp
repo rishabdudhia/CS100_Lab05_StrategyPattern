@@ -2,6 +2,8 @@
 #define __SELECT_HPP__
 
 #include <cstring>
+#include <string>
+#include "spreadsheet.hpp"
 
 using namespace std;
 
@@ -43,27 +45,27 @@ public:
 class Select_Contains : public Select{
 
         public:
-                 Select_Contains(const Spreadsheet* sheet, const string& column, const string& name){
-                        column_num = sheet->get_column_by_name(column);
+                Select_Contains(const Spreadsheet* sheet, const string& column, const string& name){
+                        num_column = sheet->get_column_by_name(column);
                         this->name = name;
-                        }
+                }
 
-                  bool select(const Spreadsheet* sheet, int row) const{
-                                string dataa;
-                                if (column_num != -1){
-                                        dataa = sheet->cell_data(row,column_num);
-                                        if(dataa.find(name) != std::string::npos){
-                                        //if (dataa.contains(name){
-                                            return true;
-                                        }
-                                        else{
-                                            return false;
-                                        }
-                                }
-                                else {return false;}
+                bool select(const Spreadsheet* sheet, int row) const{
+                              string dataa;
+                              if (num_column != -1){
+                                      dataa = sheet->cell_data(row,num_column);
+                                      if(dataa.find(name) == string::npos){
+                                      //if (dataa.contains(name){
+                                          return false;
+                                      }
+                                      else{
+                                          return true;
+                                      }
+                              }
+                              else {return false;}
                 }
         protected:
-                int column_num;
+                int num_column;
                 //string dataa;
                 string name;
 };
