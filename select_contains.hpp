@@ -9,6 +9,12 @@ using namespace std;
 
 class Select_Contains : public Select{
 	
+	private:
+
+    		int column_num;
+		string dataa;
+		string name;
+	
 	public:
 		 Select_Contains(const Spreadsheet* sheet, string& column, string& name){
 			column_num = sheet->get_column_by_name(column);
@@ -23,18 +29,13 @@ class Select_Contains : public Select{
 						return true;
 					}
 					else{
-						return false;
 				}
-				else {return false;}
-			}
-		}
+			return false;
+			}}
+		
 
 
-	protected:
-
-    		int column_num;
-		string dataa;
-		string name;	
+		
 	
 
 }; 
