@@ -5,7 +5,11 @@
 #include <algorithm>
 #include <iostream>
 
+<<<<<<< HEAD
 using namespace std; 
+=======
+using namespace std;
+>>>>>>> 8075ca8cf83396466f6f7f432fd48899bcd29f53
 
 Spreadsheet::~Spreadsheet()
 {
