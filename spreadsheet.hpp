@@ -31,7 +31,19 @@ public:
     void set_selection(Select* new_select);
 
     // TODO: Implement print_selection.
-    void print_selection(std::ostream& out) const;
+    void print_selection(std::ostream& out) const{
+	
+	if (select == null){
+		for (unsigned int i = 0; i<column_names.size(); i++){
+			for (unsigned int j = 0; j < column_names.size(); j++){
+				out << data.at(i).at(j) << " "; //i=row j=column
+				}
+			out << endl;
+			}
+		}
+	else {
+		select->data;
+		
 
     void clear();
     void set_column_names(const std::vector<std::string>& names);
