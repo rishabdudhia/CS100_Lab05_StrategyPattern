@@ -18,7 +18,7 @@ TEST(SelectTest, TestNormalOr){
     sheet.add_row({"seven", "eight", "nine"});
 
     stringstream out;
-    sheet.set_selection(new Select_Or(new Select_Contains(&sheet, "First", "e"), new Select_Contains(&sheet, "First", "v")));
+    sheet.set_selection(new Select_Or(new Select_Contains(&sheet, "First", "e"), new Select_Contains(&sheet, "First", "r")));
     sheet.print_selection(out);
 
     string expected = "one two three \nfour five six \nseven eight nine \n";
@@ -81,7 +81,7 @@ TEST (SelectTest, ORandAND) {
       new Select_Contains(&sheet, "Position", "Guard")));
     sheet.print_selection(out);
 
-    string expected = "Steph Curry Point Gaurd \nDame Lillard Point Gaurd \nKobe Bryant Shooting Gaurd \n";
+    string expected = "Steph Curry Point Guard \nDame Lillard Point Guard \nKobe Bryant Shooting Guard \n";
 
     EXPECT_EQ(out.str(), expected);
 }
@@ -123,7 +123,7 @@ TEST (SelectTest, NormalNot) {
     sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "First", "e")));
     sheet.print_selection(out);
 
-    string expected = "Anthony Davis \n";
+    string expected = "Anthony Davis Center \n";
 
     EXPECT_EQ(out.str(), expected);
 }
@@ -142,10 +142,10 @@ TEST (SelectTest, CapitalNot) {
     sheet.set_selection(new Select_Not(
       new Select_Or(
 	new Select_Contains(&sheet, "First", "L"),
-	new Select_Contains(&sheet, "Last", "L")));
+	new Select_Contains(&sheet, "Last", "L"))));
     sheet.print_selection(out);
 
-    string expected = "Steph Curry \nJoel Embiid \nAnthony Davis \nKobe Bryant \n";
+    string expected = "Steph Curry Point Guard \nJoel Embiid Center \nAnthony Davis Center \nKobe Bryant Shooting Guard \n";
 
     EXPECT_EQ(out.str(), expected);
 }
@@ -158,10 +158,10 @@ TEST (SelectTest, NotWrongColumn) {
     sheet.add_row({"seven", "eight", "nine"});
 
     stringstream out;
-    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "first", "x")));
-    sheet.pring_selection(out);
+    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "apple", "x")));
+    sheet.print_selection(out);
 
-    string expected = "";
+    string expected = "one two three \nfour five six \nseven eight nine \n";;
 
     EXPECT_EQ(out.str(), expected);
 }
@@ -170,12 +170,12 @@ TEST (SelectTest, NotNoReturn) {
     Spreadsheet sheet;
     sheet.set_column_names({"First","Second","Third"});
     sheet.add_row({"one", "two", "three"});
-    sheet.add_row({"four", "five", "sixe"});
+    sheet.add_row({"foure", "five", "sixe"});
     sheet.add_row({"seven", "eight", "nine"});
 
     stringstream out;
     sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "First", "e")));
-    sheet.pring_selection(out);
+    sheet.print_selection(out);
 
     string expected = "";
 
