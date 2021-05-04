@@ -2,6 +2,7 @@
 #include "select.hpp"
 
 #include "gtest/gtest.h"
+#include "select_test.hpp"
 
 
 int main(int argc, char **argv) {
