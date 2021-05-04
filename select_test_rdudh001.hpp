@@ -105,6 +105,21 @@ TEST (SelectTest, OrNotFound) {
     EXPECT_EQ(out.str(), expected);
 }
 
+TEST (SelectTest, OrAllCaps) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"FIRST", "SECOND", "THIRD"});
+    sheet.add_row({"ONE", "TWO", "THREE"});
+    sheet.add_row({"FOUR", "FIVE", "SIX"});
+    sheet.add_row({"SEVEN", "EIGHT", "NINE"});
+
+    stringstream out;
+    sheet.set_selection(new Select_Or(new Select_Contains(&sheet, "SECOND", "FIVE"), new Select_Contains(&sheet, "THIRD", "FOUR")));
+    sheet.print_selection(out);
+
+    string expected = "FOUR FIVE SIX \n";
+
+    EXPECT_EQ(out.str(), expected);
+}
 
 
 
@@ -182,7 +197,21 @@ TEST (SelectTest, NotNoReturn) {
     EXPECT_EQ(out.str(), expected);
 }
 
+TEST (SelectTest, NotAllCaps) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"FIRST", "SECOND", "THIRD"});
+    sheet.add_row({"ONE", "TWO", "THREE"});
+    sheet.add_row({"FOUR", "FIVE", "SIX"});
+    sheet.add_row({"SEVEN", "EIGHT", "NINE"});
 
+    stringstream out;
+    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "SECOND", "FIVE")));
+    sheet.print_selection(out);
+
+    string expected = "ONE TWO THREE \nSEVEN EIGHT NINE \n";
+
+    EXPECT_EQ(out.str(), expected);
+}
 
 
 #endif
