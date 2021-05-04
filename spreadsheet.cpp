@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <iostream>
 
+using namespace std;
+
 Spreadsheet::~Spreadsheet()
 {
     delete select;
@@ -39,4 +41,27 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
         if(column_names.at(i) == name)
             return i;
     return -1;
+}
+
+void Spreadsheet::print_selection(ostream &out) const {
+    bool sel;
+
+    if (select == nullptr) {
+	for (auto col : data) {
+	    for (auto row : col)
+		out << row << ' ';
+	    out << endl;
+	}
+    }
+
+    else {
+	for (int i = 0; i < data.size(); i++) {
+	    sel = select->select(this,i);
+	    if (sel) {
+		for (auto curr : data.at(i)) 
+		    out << curr << ' ';
+		out << endl;
+	    }
+	}
+    }
 }
