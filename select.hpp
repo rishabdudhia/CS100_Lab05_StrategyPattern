@@ -2,6 +2,10 @@
 #define __SELECT_HPP__
 
 #include <cstring>
+#include <string>
+#include "spreadsheet.hpp"
+
+using namespace std;
 
 class Select
 {
@@ -38,6 +42,7 @@ public:
     virtual bool select(const std::string& s) const = 0;
 };
 
+
 class Select_Or : public Select {
   private:
         Select* left;
@@ -61,6 +66,27 @@ class Select_Or : public Select {
                 return true;
             else
                 return false;
+
+class Select_Not : public Select {
+  private:
+        Select* chosen;
+
+  public:
+        Select_Not (Select* input) {
+            chosen = input;
+        }
+
+        ~Select_Not() {
+            delete chosen;
+        }
+
+        bool select(const Spreadsheet* sheet, int row) const {
+            if (chosen->select(sheet,row)) {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
 };
 

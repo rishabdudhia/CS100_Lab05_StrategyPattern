@@ -31,7 +31,6 @@ public:
 
     // TODO: Implement print_selection.
     void print_selection(std::ostream& out) const;
-
     void clear();
     void set_column_names(const std::vector<std::string>& names);
     void add_row(const std::vector<std::string>& row_data);
