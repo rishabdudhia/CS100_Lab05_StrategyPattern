@@ -1,10 +1,11 @@
 #include "spreadsheet.hpp"
 #include "select.hpp"
 
+#include<sstream> 
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
+using namespace std; 
 
 Spreadsheet::~Spreadsheet()
 {
@@ -45,11 +46,12 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
 
 void Spreadsheet::print_selection(ostream &out) const {
     bool sel;
-
-    if (select == nullptr) {
-	for (auto col : data) {
-	    for (auto row : col)
-		out << row << ' ';
+	
+    if(select == nullptr) {
+	for (unsigned int i = 0; i<this->data.size(); i++){
+	    for (unsigned int j = 0; j<this->data.at(i).size(); j++){
+		out << data.at(i).at(j)<< " ";
+}
 	    out << endl;
 	}
     }

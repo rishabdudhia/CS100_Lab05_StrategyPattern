@@ -1,6 +1,7 @@
 #ifndef __SPREADSHEET_HPP__
 #define __SPREADSHEET_HPP__
 
+#include<sstream> 
 #include <string>
 #include <initializer_list>
 #include <vector>

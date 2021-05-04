@@ -1,7 +1,10 @@
 #include "spreadsheet.hpp"
-#include "spreadsheet.cpp"
 #include "select.hpp"
+
 #include "gtest/gtest.h"
+
+#include "select_test.hpp"
+
 #include <string>
 #include <iostream>
 
