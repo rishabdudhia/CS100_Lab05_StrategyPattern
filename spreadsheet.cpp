@@ -50,6 +50,7 @@ int Spreadsheet::get_column_by_name(const std::string& name) const
 
 void Spreadsheet::print_selection(ostream &out) const {
     bool sel;
+	
     if(select == nullptr) {
 	for (auto col : data) {
 	    for (auto row : it)
