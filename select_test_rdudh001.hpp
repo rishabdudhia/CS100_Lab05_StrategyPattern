@@ -5,7 +5,6 @@
 
 #include "select.hpp"
 #include "spreadsheet.hpp"
-#include "spreadsheet.cpp"
 
 using namespace std;
 
@@ -27,7 +26,7 @@ TEST(SelectTest, TestNormalOr){
 
 TEST(SelectTest, TestCaptialOr) {
     Spreadsheet sheet;
-    sheet.set_coloumn_names({"Front", "Last"});
+    sheet.set_column_names({"Front", "Last"});
     sheet.add_row({"Rishab", "Dudhia"});
     sheet.add_row({"Fadi", "Zaki"});
 
@@ -77,10 +76,10 @@ TEST (SelectTest, ORandAND) {
       new Select_And(
 	new Select_Contains(&sheet, "Position", "Center"),
 	new Select_Contains(&sheet, "Position", "Davis")),
-      new Select_Contains(&sheet, "Position", "Guard"));
+      new Select_Contains(&sheet, "Position", "Guard")));
     sheet.print_selection(out);
 
-    string expected = "Steph Curry \nDame Lillard \nAnthony Davis \nKobe Bryant \n";
+    string expected = "Steph Curry Point Gaurd \nDame Lillard Point Gaurd \nKobe Bryant Shooting Gaurd \n";
 
     EXPECT_EQ(out.str(), expected);
 }
