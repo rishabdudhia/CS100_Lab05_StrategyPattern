@@ -84,6 +84,8 @@ TEST (SelectTest, ORandAND) {
 
     EXPECT_EQ(out.str(), expected);
 }
+
+
 #endif
 
 
