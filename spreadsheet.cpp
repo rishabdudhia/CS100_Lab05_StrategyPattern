@@ -1,8 +1,11 @@
 #include "spreadsheet.hpp"
 #include "select.hpp"
 
+#include<sstream> 
 #include <algorithm>
 #include <iostream>
+
+using namespace std; 
 
 Spreadsheet::~Spreadsheet()
 {
