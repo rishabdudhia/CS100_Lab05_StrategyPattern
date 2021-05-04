@@ -120,6 +120,7 @@ class Select_Or : public Select {
                 return true;
             else
                 return false;
+};
 
 class Select_Not : public Select {
   private:
