@@ -61,6 +61,7 @@ void Spreadsheet::print_selection(ostream &out) const {
 		for (auto curr : data.at(i)) 
 		    out << curr << ' ';
 		out << endl;
+
 	    }
 	}
     }
