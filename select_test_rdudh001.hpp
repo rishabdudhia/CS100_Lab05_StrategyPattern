@@ -8,6 +8,8 @@
 
 using namespace std;
 
+
+//OR tests
 TEST(SelectTest, TestNormalOr){
     Spreadsheet sheet;
     sheet.set_column_names({"First","Second","Third"});
@@ -39,7 +41,7 @@ TEST(SelectTest, TestCaptialOr) {
     EXPECT_EQ(out.str(), expected);
 }
     
-TEST(SelectTest, WrongColumn){
+TEST(SelectTest, OrWrongColumn){
     Spreadsheet sheet;
     sheet.set_column_names({"First","Last","Age","Major"});
     sheet.add_row({"Amanda","Andrews","22","business"});
@@ -84,7 +86,7 @@ TEST (SelectTest, ORandAND) {
     EXPECT_EQ(out.str(), expected);
 }
 
-TEST (SelectTest, NotFound) {
+TEST (SelectTest, OrNotFound) {
     Spreadsheet sheet;
     sheet.set_column_names({"First", "Last", "Position"});
     sheet.add_row({"Lebron", "James", "Power Forward"});
@@ -102,11 +104,87 @@ TEST (SelectTest, NotFound) {
 
     EXPECT_EQ(out.str(), expected);
 }
+
+
+
+
+//NOT tests
+TEST (SelectTest, NormalNot) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"First", "Last", "Position"});
+    sheet.add_row({"Lebron", "James", "Power Forward"});
+    sheet.add_row({"Steph", "Curry", "Point Guard"});
+    sheet.add_row({"Dame", "Lillard", "Point Guard"});
+    sheet.add_row({"Joel", "Embiid", "Center"});
+    sheet.add_row({"Anthony", "Davis", "Center"});
+    sheet.add_row({"Kobe", "Bryant", "Shooting Guard"});
+
+    stringstream out;
+    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "First", "e")));
+    sheet.print_selection(out);
+
+    string expected = "Anthony Davis \n";
+
+    EXPECT_EQ(out.str(), expected);
+}
+
+TEST (SelectTest, CapitalNot) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"First", "Last", "Position"});
+    sheet.add_row({"Lebron", "James", "Power Forward"});
+    sheet.add_row({"Steph", "Curry", "Point Guard"});
+    sheet.add_row({"Dame", "Lillard", "Point Guard"});
+    sheet.add_row({"Joel", "Embiid", "Center"});
+    sheet.add_row({"Anthony", "Davis", "Center"});
+    sheet.add_row({"Kobe", "Bryant", "Shooting Guard"});
+
+    stringstream out;
+    sheet.set_selection(new Select_Not(
+      new Select_Or(
+	new Select_Contains(&sheet, "First", "L"),
+	new Select_Contains(&sheet, "Last", "L")));
+    sheet.print_selection(out);
+
+    string expected = "Steph Curry \nJoel Embiid \nAnthony Davis \nKobe Bryant \n";
+
+    EXPECT_EQ(out.str(), expected);
+}
+
+TEST (SelectTest, NotWrongColumn) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"First","Second","Third"});
+    sheet.add_row({"one", "two", "three"});
+    sheet.add_row({"four", "five", "six"});
+    sheet.add_row({"seven", "eight", "nine"});
+
+    stringstream out;
+    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "first", "x")));
+    sheet.pring_selection(out);
+
+    string expected = "";
+
+    EXPECT_EQ(out.str(), expected);
+}
+
+TEST (SelectTest, NotNoReturn) {
+    Spreadsheet sheet;
+    sheet.set_column_names({"First","Second","Third"});
+    sheet.add_row({"one", "two", "three"});
+    sheet.add_row({"four", "five", "sixe"});
+    sheet.add_row({"seven", "eight", "nine"});
+
+    stringstream out;
+    sheet.set_selection(new Select_Not(new Select_Contains(&sheet, "First", "e")));
+    sheet.pring_selection(out);
+
+    string expected = "";
+
+    EXPECT_EQ(out.str(), expected);
+}
+
+
+
+
 #endif
-
-
-
-
-
 
 
