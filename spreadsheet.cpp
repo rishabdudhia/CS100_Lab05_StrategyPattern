@@ -5,11 +5,7 @@
 #include <algorithm>
 #include <iostream>
 
-<<<<<<< HEAD
 using namespace std; 
-=======
-using namespace std;
->>>>>>> 8075ca8cf83396466f6f7f432fd48899bcd29f53
 
 Spreadsheet::~Spreadsheet()
 {
@@ -52,9 +48,10 @@ void Spreadsheet::print_selection(ostream &out) const {
     bool sel;
 	
     if(select == nullptr) {
-	for (auto col : data) {
-	    for (auto row : it)
-		out << row << " ";
+	for (unsigned int i = 0; i<this->data.size(); i++){
+	    for (unsigned int j = 0; j<this->data.at(i).size(); j++){
+		out << data.at(i).at(j)<< " ";
+}
 	    out << endl;
 	}
     }
