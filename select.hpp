@@ -42,33 +42,6 @@ public:
     virtual bool select(const std::string& s) const = 0;
 };
 
-class Select_Contains : public Select{
-
-        public:
-                Select_Contains(const Spreadsheet* sheet, const string& column, const string& name){
-                        num_column = sheet->get_column_by_name(column);
-                        this->name = name;
-                }
-
-                bool select(const Spreadsheet* sheet, int row) const{
-                              string dataa;
-                              if (num_column != -1){
-                                      dataa = sheet->cell_data(row,num_column);
-                                      if(dataa.find(name) == string::npos){
-                                      //if (dataa.contains(name){
-                                          return false;
-                                      }
-                                      else{
-                                          return true;
-                                      }
-                              }
-                              else {return false;}
-                }
-        protected:
-                int num_column;
-                //string dataa;
-                string name;
-};
 
 class Select_Not : public Select {
   private:
